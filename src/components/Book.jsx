@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 const title = "React";
 
 
@@ -36,18 +36,19 @@ const Book = () => {
         },
     ];
     function handleChange(e){
-        console.log(e.target.value);
+      setSearchTerm(e.target.value);
     }
+    const [searchTerm,setSearchTerm]=useState('');
+
+
     return (
 
             <div >
                 <h1>Hello {title}</h1>
-
                 <label htmlFor='Search'>Search:</label>
                 <input type='text' id="Search" onChange={handleChange}/>
-
+<p>Searching for <strong>{searchTerm}</strong></p>
                 <List list={stories}/>
-
             </div>
     )
 
