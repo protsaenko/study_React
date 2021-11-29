@@ -1,6 +1,25 @@
 import React, {useState} from 'react';
+
 const title = "React";
 
+const stories = [
+    {
+        title: 'React',
+        url: 'https://reactjs.org/',
+        author: 'Jordan Walke',
+        num_comments: 3,
+        points: 4,
+        objectID: 0,
+    },
+    {
+        title: 'Redux',
+        url: 'https://redux.js.org/',
+        author: 'Dan Abramov, Andrew Clark',
+        num_comments: 2,
+        points: 5,
+        objectID: 1,
+    },
+];
 
 function List(props) {
     let arr = props.list;
@@ -16,40 +35,37 @@ function List(props) {
     });
 }
 
-const Book = () => {
-    const stories = [
-        {
-            title: 'React',
-            url: 'https://reactjs.org/',
-            author: 'Jordan Walke',
-            num_comments: 3,
-            points: 4,
-            objectID: 0,
-        },
-        {
-            title: 'Redux',
-            url: 'https://redux.js.org/',
-            author: 'Dan Abramov, Andrew Clark',
-            num_comments: 2,
-            points: 5,
-            objectID: 1,
-        },
-    ];
-    function handleChange(e){
-      setSearchTerm(e.target.value);
+function Search(props) {
+    function handleChange(e) {
+        setSearchTerm(e.target.value);
+        props.onSearch(e);
     }
-    const [searchTerm,setSearchTerm]=useState('');
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    return (
+        <>  <label htmlFor='Search'>Search:</label>
+            <input type='text' id="Search" onChange={handleChange}/>
+            <p>Searching for <strong>{searchTerm}</strong></p></>
+
+    );
+
+}
+
+const Book = () => {
+
+    const handleSearch = event => {
+        console.log(event.target.value);
+    };
 
 
     return (
 
-            <div >
-                <h1>Hello {title}</h1>
-                <label htmlFor='Search'>Search:</label>
-                <input type='text' id="Search" onChange={handleChange}/>
-<p>Searching for <strong>{searchTerm}</strong></p>
-                <List list={stories}/>
-            </div>
+        <div>
+            <h1>Hello {title}</h1>
+            <Search onSearch={handleSearch}/>
+            <List list={stories}/>
+        </div>
     )
 
 };
