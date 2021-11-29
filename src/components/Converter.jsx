@@ -12,11 +12,13 @@ function Pound(props) {
 const Converter = () => {
     return (
         <div>
-            <Amount>{
+            <Amount amountOne={
                 (amount) => (<div><Euro amount={amount}/>
                     <Pound amount={amount}/></div>)
-            }
-            </Amount>
+            } amountTwo={
+            (amount) => (<div><Euro amount={amount}/>
+                <Pound amount={amount}/></div>)
+            }/>
         </div>
     );
 };
